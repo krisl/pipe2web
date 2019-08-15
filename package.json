@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/krisl/pipe2web/issues"
   },
-  "homepage": "https://github.com/krisl/pipe2web#readme"
+  "homepage": "https://github.com/krisl/pipe2web#readme",
+  "dependencies": {
+    "sse": "0.0.8"
+  }
 }
