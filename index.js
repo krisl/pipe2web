@@ -11,6 +11,17 @@ http
         console.log(`Closing`)
       }
     })
+    res.writeHead(200, {
+      "Connection": "keep-alive",
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache"
+    })
+    res.write("\n")
+
+    setInterval(() => {
+      res.write(`data: ${JSON.stringify({info: 'blah', x: 2})}`)
+      res.write("\n\n")
+    }, 3000)
   })
   .listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`)
