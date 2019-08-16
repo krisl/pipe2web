@@ -1,10 +1,12 @@
 const http = require('http')
 const SSE = require('sse')
+const fs = require('fs')
 
 const PORT = 3000
 const EVENT_TYPE = undefined
 
-const lines = process.stdin.pipe(require('split2')())
+//const lines = process.stdin.pipe(require('split2')())
+const stream = fs.createReadStream('/dev/stdin');
 const server = http
   .createServer((req, res) => {
     console.log('server handles')
@@ -15,7 +17,8 @@ const server = http
     sse.on('connection', (client) => {
       console.log('connected!')
       let id = 1
-      lines.on('data', line => {
+      stream.on('data', line => {
+        line = line.toString()
         console.log({line})
         client.send(EVENT_TYPE, line, id++)
       })
