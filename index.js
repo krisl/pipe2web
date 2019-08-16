@@ -18,6 +18,7 @@ const server = http
       console.log('connected!')
       let id = 1
       lines.on('data', line => {
+        console.log({line})
         client.send(EVENT_TYPE, line, id++)
       })
     })
@@ -27,5 +28,5 @@ const server = http
 //  console.log({line: line.toString()})
 //}
 //
-//process.stdin.pipe(require('split2')()).on('data', processLine)
+//lines.on('data', processLine)
 //process.stdin.on('data', processLine)
