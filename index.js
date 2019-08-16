@@ -17,7 +17,7 @@ const server = http
       let id = 1
       lines.on('data', line => {
         console.log({line})
-        client.send(EVENT_TYPE, line, id++)
+        client.send(EVENT_TYPE, JSON.stringify({mtr: line}), id++)
       })
     })
   })
