@@ -4,6 +4,7 @@ const SSE = require('sse')
 const PORT = 3000
 const EVENT_TYPE = undefined
 
+const lines = process.stdin.pipe(require('split2')())
 const server = http
   .createServer((req, res) => {
     console.log('server handles')
@@ -14,10 +15,15 @@ const server = http
     sse.on('connection', (client) => {
       console.log('connected!')
       let id = 1
-      setInterval(() => {
-        client.send(EVENT_TYPE, JSON.stringify({info: 'blah', x: 2}), id++)
-      }, 3000)
+      lines.on('data', line => {
+        client.send(EVENT_TYPE, line, id++)
+      })
     })
   })
 
-
+//function processLine (line) {
+//  console.log({line: line.toString()})
+//}
+//
+//process.stdin.pipe(require('split2')()).on('data', processLine)
+//process.stdin.on('data', processLine)
