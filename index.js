@@ -11,7 +11,7 @@ const server = http
   })
   .listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`)
-    const sse = new SSE(server, {path: '/events'})
+    const sse = new SSE(server, {path: '/events', headers: { 'Access-Control-Allow-Origin': '*', 'Content-Length': ''}})
     sse.on('connection', (client) => {
       console.log('connected!')
       let id = 1
