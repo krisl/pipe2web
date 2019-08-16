@@ -1,12 +1,10 @@
 const http = require('http')
 const SSE = require('sse')
-const readline = require('readline')
 
 const PORT = 3000
 const EVENT_TYPE = undefined
 
-//const lines = process.stdin.pipe(require('split2')())
-const rl = readline.createInterface({input: process.stdin})
+const lines = process.stdin.pipe(require('split2')())
 const server = http
   .createServer((req, res) => {
     console.log('server handles')
@@ -17,8 +15,7 @@ const server = http
     sse.on('connection', (client) => {
       console.log('connected!')
       let id = 1
-      rl.on('line', line => {
-        line = line.toString()
+      lines.on('data', line => {
         console.log({line})
         client.send(EVENT_TYPE, line, id++)
       })
