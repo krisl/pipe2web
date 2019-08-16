@@ -1,10 +1,12 @@
 const http = require('http')
 const SSE = require('sse')
+es = require('event-stream');
 
 const PORT = 3000
 const EVENT_TYPE = undefined
 
-const lines = process.stdin.pipe(require('split2')())
+const lines = process.stdin.pipe(es.split())
+
 const server = http
   .createServer((req, res) => {
     console.log('server handles')
