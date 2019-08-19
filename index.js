@@ -1,7 +1,7 @@
 const http = require('http')
 const SSE = require('sse')
 
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 const EVENT_TYPE = undefined
 
 const lines = process.stdin.pipe(require('split2')())
