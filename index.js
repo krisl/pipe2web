@@ -14,7 +14,7 @@ const server = http
     const sse = new SSE(server, {path: '/events', headers: { 'Access-Control-Allow-Origin': '*', 'Content-Length': ''}})
     sse.on('connection', (client) => {
       console.log('connected!')
-      let id = 1
+      var id = 1
       lines.on('data', line => {
         console.log({line})
         client.send(EVENT_TYPE, line, id++)
